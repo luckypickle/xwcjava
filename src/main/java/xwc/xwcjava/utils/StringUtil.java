@@ -9,7 +9,20 @@ public class StringUtil {
     }
 
     public static String join(List<String> src, String delimiter) {
-        return src == null ? null : String.join(delimiter, (CharSequence[])src.toArray(new String[0]));
+        if(src == null) {
+            return null;
+        }
+        if(delimiter == null) {
+            delimiter = "";
+        }
+        StringBuilder builder = new StringBuilder();
+        for(int i=0;i<src.size();i++) {
+            if(i>0) {
+                builder.append(delimiter);
+            }
+            builder.append(src.get(i));
+        }
+        return builder.toString();
     }
 
     public static String capitaliseFirstLetter(String string) {

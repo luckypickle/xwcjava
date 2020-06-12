@@ -1,6 +1,9 @@
 package xwc.xwcjava.transaction;
 
+import xwc.xwcjava.operation.IOperation;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionUtil {
     public static Transaction defaultTransaction() {
@@ -8,11 +11,11 @@ public class TransactionUtil {
         tx.setRefBlockNum(0);
         tx.setRefBlockPrefix(0);
         tx.setExpiration("");
-        tx.setOperations(new ArrayList<>());
-        tx.setExtensions(new ArrayList<>());
-        tx.setSignatures(new ArrayList<>());
+        tx.setOperations(new ArrayList<List<Object>>());
+        tx.setExtensions(new ArrayList<Object>());
+        tx.setSignatures(new ArrayList<String>());
         tx.setTransientExpiration(0);
-        tx.setTransientOperations(new ArrayList<>());
+        tx.setTransientOperations(new ArrayList<IOperation>());
         return tx;
     }
 }

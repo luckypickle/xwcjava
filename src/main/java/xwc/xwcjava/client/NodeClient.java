@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
+import xwc.xwcjava.utils.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NodeClient implements Closeable {
@@ -91,7 +92,7 @@ public class NodeClient implements Closeable {
             return;
         }
         int requestId = rpcRes.getId();
-        CompletableFuture<NodeRpcResponse> resFuture = waitingRpcRequests.getOrDefault(requestId, null);
+        CompletableFuture<NodeRpcResponse> resFuture = waitingRpcRequests.get(requestId);
         if(resFuture==null) {
             return;
         }

@@ -9,7 +9,7 @@ public class AuthorityUtil {
         Authority authority = new Authority();
         authority.setWeightThreshold(1);
         authority.setAccountAuths(new ArrayList<>());
-        authority.setKeyAuths(Collections.singletonList(Arrays.asList("", 1)));
+        authority.setKeyAuths(Collections.singletonList(Arrays.asList((Object)"", 1)));
         authority.setTransientKeyAuths("");
         return authority;
     }

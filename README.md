@@ -6,7 +6,7 @@ xwc java sdk
 # dependencies
 
 * maven3
-* jdk8+
+* jdk7+
 * a xwc websocket rpc endpoint(start xwc_node with --rpc-endpoint=127.0.0.1:8090)
 * if you want use public websocket rpc endpoint, you can use ws://8.210.70.217:10043
 

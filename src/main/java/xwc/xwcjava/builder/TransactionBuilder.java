@@ -6,10 +6,7 @@ import xwc.xwcjava.config.Constants;
 import xwc.xwcjava.crypto.CryptoUtil;
 import xwc.xwcjava.exceptions.PubKeyInvalidException;
 import xwc.xwcjava.exceptions.TransactionException;
-import xwc.xwcjava.operation.ContractInvokeOperation;
-import xwc.xwcjava.operation.ContractTransferOperation;
-import xwc.xwcjava.operation.OperationsUtil;
-import xwc.xwcjava.operation.TransferOperation;
+import xwc.xwcjava.operation.*;
 import xwc.xwcjava.pubkey.PubKeyUtil;
 import xwc.xwcjava.serializer.TransactionSerializer;
 import xwc.xwcjava.transaction.Memo;
@@ -89,8 +86,8 @@ public class TransactionBuilder {
         tx.setTransientExpiration(expireSec);
         tx.setOperations(Collections.singletonList(Arrays.asList(operation.getOperationType(), operation)));
         tx.setExtensions(new ArrayList<>());
-        tx.setSignatures(new ArrayList<>());
-        tx.setTransientOperations(Collections.singletonList(operation));
+        tx.setSignatures(new ArrayList<String>());
+        tx.setTransientOperations(Collections.singletonList((IOperation) operation));
         return tx;
     }
 
@@ -140,8 +137,8 @@ public class TransactionBuilder {
         tx.setTransientExpiration(expireSec);
         tx.setOperations(Collections.singletonList(Arrays.asList(operation.getOperationType(), operation)));
         tx.setExtensions(new ArrayList<>());
-        tx.setSignatures(new ArrayList<>());
-        tx.setTransientOperations(Collections.singletonList(operation));
+        tx.setSignatures(new ArrayList<String>());
+        tx.setTransientOperations(Collections.singletonList((IOperation) operation));
         return tx;
     }
 
@@ -194,8 +191,8 @@ public class TransactionBuilder {
         tx.setTransientExpiration(expireSec);
         tx.setOperations(Collections.singletonList(Arrays.asList(transferOperation.getOperationType(), transferOperation)));
         tx.setExtensions(new ArrayList<>());
-        tx.setSignatures(new ArrayList<>());
-        tx.setTransientOperations(Collections.singletonList(transferOperation));
+        tx.setSignatures(new ArrayList<String>());
+        tx.setTransientOperations(Collections.singletonList((IOperation) transferOperation));
         return tx;
     }
 
