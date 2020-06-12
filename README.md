@@ -3,6 +3,11 @@ xwcjava
 
 xwc java sdk
 
+# dependencies
+
+* maven3
+* jdk8+
+* a xwc websocket rpc endpoint(start xwc_node with --rpc-endpoint=127.0.0.1:8090)
 
 # Usage
 
@@ -14,6 +19,8 @@ xwc java sdk
 * create and sign transfer transaction
 
 ```
+// example: src/test/java/xwc/xwcjava/test/crypto/SignatureTests.java
+
 String refInfo = "30375,575365464";
 String chainId = Constants.mainnetChainId;
 String wifStr = "";
@@ -31,6 +38,8 @@ log.info("signed tx: {}", txJson);
 * invoke contract transaction
 
 ```
+// example: src/test/java/xwc/xwcjava/test/crypto/SignatureTests.java
+
 String refInfo = "16573,2299525098";
 String chainId = Constants.mainnetChainId;
 String wifStr = "";
@@ -53,6 +62,8 @@ log.info("signed tx: {}", txJson);
 
 * transfer asset to contract transaction
 ```
+// example: src/test/java/xwc/xwcjava/test/crypto/SignatureTests.java
+
 String refInfo = getRefInfo();
 String chainId = Constants.mainnetChainId;
 String wifStr = "";
@@ -76,6 +87,8 @@ log.info("signed tx: {}", txJson);
 * generate private key and address
 
 ```
+// example: src/test/java/xwc/xwcjava/test/address/AddressTests.java
+
 ECKey ecKey = PrivateKeyGenerator.generate();
 String privateKeyHex = ecKey.getPrivateKeyAsHex();
 String wif = PrivateKeyUtil.privateKeyToWif(ecKey);
