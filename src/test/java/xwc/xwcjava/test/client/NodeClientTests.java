@@ -1,9 +1,11 @@
 package xwc.xwcjava.test.client;
 
+import com.alibaba.fastjson.JSONArray;
 import xwc.xwcjava.client.NodeClient;
 import xwc.xwcjava.client.response.AmountInfoResponse;
 import xwc.xwcjava.client.response.AssetInfoResponse;
 import xwc.xwcjava.client.response.TxOperationReceiptResponse;
+import xwc.xwcjava.config.Constants;
 import xwc.xwcjava.operation.NodeException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -17,8 +19,18 @@ public class NodeClientTests {
     private static final Logger log = LoggerFactory.getLogger(NodeClientTests.class);
 
     @Test
+    public void testGetChainIdFromRemoteNode() throws NodeException {
+        String nodeRpcEndpoint = Constants.defaultWsRpcEndpoint;
+        NodeClient nodeClient = new NodeClient(nodeRpcEndpoint);
+        nodeClient.open();
+        nodeClient.sendLogin();
+        String chainId = nodeClient.getChainId();
+        log.info("chainId {}", chainId);
+    }
+
+    @Test
     public void testNodeClientGetInfo() throws NodeException {
-        String nodeRpcEndpoint = "ws://xwc-node-endpoint:port";
+        String nodeRpcEndpoint = Constants.defaultWsRpcEndpoint;
         NodeClient nodeClient = new NodeClient(nodeRpcEndpoint);
         try {
             nodeClient.open();

@@ -34,7 +34,7 @@ public class SignatureTests {
     }
 
     private String getRefInfo() throws NodeException {
-        String nodeRpcEndpoint = "ws://xwc-node-endpoint:port";
+        String nodeRpcEndpoint = Constants.defaultWsRpcEndpoint;
         NodeClient nodeClient = new NodeClient(nodeRpcEndpoint);
         nodeClient.open();
         nodeClient.sendLogin();
