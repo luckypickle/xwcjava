@@ -15,7 +15,37 @@ xwc java sdk
 * `mvn package install -Dmaven.test.skip=true` to install lib locally
 * add dependency to pom.xml or build.gradle
 
+```
+<dependency>
+    <groupId>xwc</groupId>
+    <artifactId>xwcjava</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
+# Steps for send a transfer transaction
+
+* generate new private key and address or get address from existed private key
+* generate transfer or other transaction not signed
+* use private key to sign the raw transaction
+* use xwc websocket rpc endpoint to broadcast to signed transaction
+
+
 # Demo
+
+* generate private key and address
+
+```
+// example: src/test/java/xwc/xwcjava/test/address/AddressTests.java
+
+ECKey ecKey = PrivateKeyGenerator.generate(); // generate a new private key-public key pair
+String privateKeyHex = ecKey.getPrivateKeyAsHex(); // get the generated private key as hex format
+String wif = PrivateKeyUtil.privateKeyToWif(ecKey); // get the generated private key as WIF format
+log.info("privateKeyHex: {}", privateKeyHex);
+log.info("privateKey wif: {}", wif);
+Address address = Address.fromPubKey(ecKey.getPubKey(), AddressVersion.NORMAL); // get the XWC address from public key
+log.info("address: {}", address);
+```
 
 * create and sign transfer transaction
 
@@ -30,7 +60,7 @@ String toAddr = "";
 BigDecimal amount = new BigDecimal("0.001");
 BigDecimal fee = new BigDecimal("0.0011");
 String memo = "test";
-Transaction tx = TransactionBuilder.createTransferTransaction(refInfo, fromAddr, toAddr, amount, "1.3.0", 5, fee, memo, null);
+Transaction tx = TransactionBuilder.createTransferTransaction(refInfo, fromAddr, toAddr, amount, Constants.XWC_ASSET_ID, 5, fee, memo, null);
 String txJson = TransactionBuilder.signTransaction(tx, wifStr, chainId, Address.ADDRESS_PREFIX);
 log.info("signed tx: {}", txJson);
 // then you can use client rpc's lightwallet_broadcast or node rpc to broadcast this signed transaction json
@@ -80,23 +110,9 @@ long gasPrice = 1;
 BigDecimal fee = new BigDecimal("0.003");
 
 Transaction tx = TransactionBuilder.createContractTransferTransaction(refInfo, callerAddr, callerPubKey,
-        contractId, transferAmount, "1.3.0", Constants.xwcPrecision, transferMemo, fee, gasLimit, gasPrice, null);
+        contractId, transferAmount, Constants.XWC_ASSET_ID, Constants.xwcPrecision, transferMemo, fee, gasLimit, gasPrice, null);
 String txJson = TransactionBuilder.signTransaction(tx, wifStr, chainId, Address.ADDRESS_PREFIX);
 log.info("signed tx: {}", txJson);
-```
-
-* generate private key and address
-
-```
-// example: src/test/java/xwc/xwcjava/test/address/AddressTests.java
-
-ECKey ecKey = PrivateKeyGenerator.generate();
-String privateKeyHex = ecKey.getPrivateKeyAsHex();
-String wif = PrivateKeyUtil.privateKeyToWif(ecKey);
-log.info("privateKeyHex: {}", privateKeyHex);
-log.info("privateKey wif: {}", wif);
-Address address = Address.fromPubKey(ecKey.getPubKey(), AddressVersion.NORMAL);
-log.info("address: {}", address);
 ```
 
 * get data from network node rpc

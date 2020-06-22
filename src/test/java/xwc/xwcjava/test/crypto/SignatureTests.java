@@ -58,7 +58,7 @@ public class SignatureTests {
         BigDecimal fee = new BigDecimal("0.003");
 
         Transaction tx = TransactionBuilder.createContractTransferTransaction(refInfo, callerAddr, callerPubKey,
-                contractId, transferAmount, "1.3.0", Constants.xwcPrecision, transferMemo, fee, gasLimit, gasPrice, null);
+                contractId, transferAmount, Constants.XWC_ASSET_ID, Constants.xwcPrecision, transferMemo, fee, gasLimit, gasPrice, null);
         String txJson = TransactionBuilder.signTransaction(tx, wifStr, chainId, Address.ADDRESS_PREFIX);
         log.info("signed tx: {}", txJson);
     }
@@ -95,7 +95,7 @@ public class SignatureTests {
         BigDecimal amount = new BigDecimal("0.001");
         BigDecimal fee = new BigDecimal("0.0011");
         String memo = "test";
-        Transaction tx = TransactionBuilder.createTransferTransaction(refInfo, fromAddr, toAddr, amount, "1.3.0", 5, fee, memo, null);
+        Transaction tx = TransactionBuilder.createTransferTransaction(refInfo, fromAddr, toAddr, amount, Constants.XWC_ASSET_ID, 5, fee, memo, null);
         String txJson = TransactionBuilder.signTransaction(tx, wifStr, chainId, Address.ADDRESS_PREFIX);
         log.info("signed tx: {}", txJson);
     }
