@@ -12,6 +12,7 @@ public class Authority {
     private List<Object> accountAuths;
     @JSONField(name = "key_auths")
     private List<List<Object>> keyAuths;
+    @JSONField(serialize = false)
     private String transientKeyAuths;
 
     public long getWeightThreshold() {

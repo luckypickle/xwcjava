@@ -1,5 +1,7 @@
 package xwc.xwcjava.transaction;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.beans.Transient;
 
 public class Memo {
@@ -8,7 +10,9 @@ public class Memo {
     private long nonce;
     private String message;
 
+    @JSONField(serialize = false)
     private boolean empty;
+    @JSONField(serialize = false)
     private String transientMessage;
 
     public String getFrom() {

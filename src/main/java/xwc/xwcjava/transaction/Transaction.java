@@ -15,7 +15,9 @@ public class Transaction {
     private List<List<Object>> operations;
     private List<Object> extensions;
     private List<String> signatures;
+    @JSONField(serialize = false)
     private long transientExpiration;
+    @JSONField(serialize = false)
     private List<IOperation> transientOperations;
 
     public int getRefBlockNum() {
